@@ -1,25 +1,22 @@
 
 # 4.4 Вложенные списки
 
+n, a, b, c, d, o = '7 % ? * ( 0'.split()
+n = int(n)
+m = [[o]*n for _ in range(n)]
 
-c = '0'
-n = 6
-def matrix(a, m=None):
-    if not m:
-        m = [[c]*n for _ in range(n)]
-    if a > 2:
-        for i in range(n-a,a):
-            for j in range(n-a,a):
-                if i < j < a-i-1:
-                    m[i][j] = '?'
-                elif j < i < a-j-1:
-                    m[i][j] = '!'
-        matrix(a-1, m)
-    return m
+for i in range(n):
+    for j in range(n):
+        if i < j < n-i-1:
+            m[j][i] = a
+            m[i][j] = b
+        if i > j > n-i-1:
+            m[j][i] = c
+            m[i][j] = d
 
-for line in matrix(n):
+for line in m:
     print(*line)
-# print(matrix(n))
+
 
 # m, n, k = map(int, input().split())
 # a = 0
