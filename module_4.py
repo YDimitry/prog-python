@@ -1,6 +1,108 @@
 
+# 4.4 Вложенные списки
+
+
+c = '0'
+n = 6
+def matrix(a, m=None):
+    if not m:
+        m = [[c]*n for _ in range(n)]
+    if a > 2:
+        for i in range(n-a,a):
+            for j in range(n-a,a):
+                if i < j < a-i-1:
+                    m[i][j] = '?'
+                elif j < i < a-j-1:
+                    m[i][j] = '!'
+        matrix(a-1, m)
+    return m
+
+for line in matrix(n):
+    print(*line)
+# print(matrix(n))
+
+# m, n, k = map(int, input().split())
+# a = 0
+# lst = []
+#
+# for i in range(n):
+#     line = []
+#     for j in range(m):
+#         a += 1
+#         line += [a]
+#     line += ['|']+[i+k for i in line]
+#     lst += [line]
+#
+# for line in lst:
+#     print(''.join(["{:<5}".format(i) for i in line]).rstrip())
+
+# "{:>3}".format(i)
+
+# from itertools import repeat
+#
+# a = zip(repeat(0),[1,2,3],repeat(0))
+# print(*a)
+
+# m = [input().split()]
+# m += [input().split() for _ in range(len(m[0])-1)]
+#
+# for i in range(len(m)-1,-1,-1):
+#     print(*reversed(m[i]))
+
+
+# from functools import partial
+#
+# n, x = map(int, input().split())
+# lst = map(partial(map,lambda v:int(v)+x), [input().split() for _ in range(n)])
+# for line in lst:
+#     print(list(line))
+
+
+# n, g, d, w = input().split()
+# res = []
+# for i in range(int(n)):
+#     line = []
+#     for j in range(int(n)):
+#         if j < i:
+#             line.append(g)
+#         elif j > i:
+#             line.append(w)
+#         else:
+#             line.append(d)
+#     res += [line]
+#
+# print(*res,sep='\n')
+
+# _, n = map(int, input().split())
+# print(*[list(map(int,input().split())) for _ in range(n)],sep='\n')
+
+# n,m,s = input().split()
+# print(*[[s]*int(m)]*int(n), sep='\n')
+
+
 # 4.2 Кортежи
 # import time
+
+
+# lst = [tuple(map(int,input().split())) for _ in range(int(input()))]
+# filt = list(filter(lambda l: l[0] % 2 ^ l[1] % 2, lst))
+# n = len(lst) - len(filt)
+# repl = max(filt, key=sum)
+# print(n)
+# for p in map(lambda l: bool(l[0] % 2) == bool(l[1] % 2) and repl or l,lst):
+#     print(*p)
+
+
+# def tribonach(n):
+#     prev = (1,1,1)
+#     while n:
+#         yield prev[0]
+#         prev = (*prev[1:],sum(prev))
+#         n -= 1
+#
+#
+# print(*tribonach(5))
+
 #
 # passN = int(input())
 # freecells = list(range(int(input()),0,-1))
@@ -24,7 +126,12 @@
 # lst = [tuple(input().split()) for _ in range(int(input()))]
 # lst.sort(key=lambda l: int(l[0]))
 # [print(*l,end=' ') for l in lst]
+# for _ in range(len(lst)):
+#     m = min(lst,key=lambda l: int(l[0]))
+#     print(*m, end=' ')
+#     lst.remove(m)
 
+    # lst.remove(t)
 
 
 # 4.3 Словари
