@@ -1,21 +1,73 @@
 
 # 4.4 Вложенные списки
+import pickle
+import zlib
+from base64 import b64encode,b64decode
+from functools import reduce, partial
+from itertools import repeat
+from operator import methodcaller, add, truediv
 
-n, a, b, c, d, o = '7 % ? * ( 0'.split()
-n = int(n)
-m = [[o]*n for _ in range(n)]
+import numpy
+from itertoolz import take, drop
+from toolz import curry, compose
 
-for i in range(n):
-    for j in range(n):
-        if i < j < n-i-1:
-            m[j][i] = a
-            m[i][j] = b
-        if i > j > n-i-1:
-            m[j][i] = c
-            m[i][j] = d
+dat = []
+with open('task19.csv', 'r', encoding="utf-8") as task:
+    for line in task:
+        dat += [line.split(';')[:5]]
 
-for line in m:
-    print(*line)
+ser = b64encode(zlib.compress(pickle.dumps(dat)))
+# print(serial_grades)
+data = pickle.loads(zlib.decompress(b64decode(ser)))
+
+# prod = list(map(methodcaller('lower'), input().split()))
+# prod = input().split()
+# kall = {p[0]:p[4] for p in filter(lambda a: a[0] in prod, drop(1, data))}
+# s = []
+# for p in prod:
+#     s += [float(kall[p].replace(',','.',1))]
+#     print(p,kall[p])
+# print('Итого:',str(sum(s)/len(s)).replace('.',','))
+
+
+# n = input()
+# print(*data[0][::4])
+# awg = lambda a: truediv(*reduce(partial(map,add),zip(map(compose(float,methodcaller('replace',',','.',1)), a), repeat(1)),(0,0)))
+# fun = lambda o: o + [str(awg(o[1:])).replace('.',',')]
+# for line in map(fun,take(n-1, drop(1,data))):
+#     print(*line)
+
+
+# n = input()
+# print(*data[0][::4])
+# fun = lambda o: f"{o[0]} {sum(map(compose(float,methodcaller('replace',',','.',1)), o[1:]))}"
+# print(*map(fun,take(n-1, drop(1,data))),sep='\n')
+
+# x, y = map(int,input().split())
+# print(data[x][y].replace(',','',1).isdigit() and float(data[x][y].replace(',','.',1))+1 or data[x][y])
+
+# a = input().lower()
+# for line in filter(lambda l: l[0].lower().startswith(a), data):
+#     print(' '.join(line).rstrip())
+
+# for i in range(int(input())):
+#     print(' '.join(data[i]).rstrip())
+
+# n, a, b, c, d, o = '7 % ? * ( 0'.split()
+# n = int(n)
+# m = [[o]*n for _ in range(n)]
+#
+# for i in range(n):
+#     for j in range(n):
+#         if i < j < n-i-1:
+#             m[j][i] = a
+#             m[i][j] = b
+#         if i > j > n-i-1:
+#             m[j][i] = c
+#             m[i][j] = d
+#
+# for line in m:
+#     print(*line)
 
 
 # m, n, k = map(int, input().split())
